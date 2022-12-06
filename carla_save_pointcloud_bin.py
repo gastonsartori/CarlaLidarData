@@ -47,7 +47,7 @@ def generate_lidar_bp(arg, world, blueprint_library, delta):
         lidar_bp.set_attribute('dropoff_intensity_limit', '1.0')
         lidar_bp.set_attribute('dropoff_zero_intensity', '0.0')
     else:
-        lidar_bp.set_attribute('noise_stddev', '0.2')
+        lidar_bp.set_attribute('noise_stddev', '0.01')
 
     lidar_bp.set_attribute('upper_fov', str(arg.upper_fov))
     lidar_bp.set_attribute('lower_fov', str(arg.lower_fov))
@@ -81,8 +81,9 @@ def main(arg):
 
         #(x=150.64, y=306.46, z=1.5)
         #(X=15381.000000,Y=30022.000000,Z=36.000000)
-        #lidar_transform = carla.Transform(carla.Location(arg.x, arg.y, arg.z), 
-        lidar_transform = carla.Transform(carla.Location(0.0, 0.0, 1.5), 
+        #(X=14560.474609,Y=24095.566406,Z=23.351044)
+        lidar_transform = carla.Transform(carla.Location(arg.x, arg.y, arg.z), 
+        #lidar_transform = carla.Transform(carla.Location(0.0, 0.0, 1.5), 
                             carla.Rotation(pitch=0.0, yaw=0.0, roll=0.0))
 
 
@@ -141,12 +142,12 @@ if __name__ == "__main__":
         help='actor filter (default: "vehicle.*")')
     argparser.add_argument(
         '--upper-fov',
-        default=15.0,
+        default=2.0,
         type=float,
         help='lidar\'s upper field of view in degrees (default: 15.0)')
     argparser.add_argument(
         '--lower-fov',
-        default=-25.0,
+        default=-24.8,
         type=float,
         help='lidar\'s lower field of view in degrees (default: -25.0)')
     argparser.add_argument(
@@ -161,7 +162,7 @@ if __name__ == "__main__":
         help='lidar\'s maximum range in meters (default: 100.0)')
     argparser.add_argument(
         '--points-per-second',
-        default=500000,
+        default=13000000,
         type=int,
         help='lidar\'s points per second (default: 500000)')
     argparser.add_argument(
